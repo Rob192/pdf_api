@@ -60,7 +60,8 @@ class Pdf2textAPI (Resource):
             pdf2txt(full_filename) #call pdf2txt on pdf
             with open (full_filename.with_suffix('.txt'), 'rb') as f:
                 output = f.read()
-            # TODO: remove files after use
+            os.remove(full_filename)
+            os.remove(full_filename.with_suffix('.txt'))
             data["text"] = str(output)
             data["success"] = True
             # stats_dict[:]
