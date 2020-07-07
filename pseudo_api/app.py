@@ -8,6 +8,7 @@ from flask_restful import Api, Resource, reqparse, fields, marshal
 from flask import Flask
 from flask import request, jsonify
 from sqlitedict import SqliteDict
+from pdf2txt import pdf2txt
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -50,30 +51,31 @@ class Pdf2textAPI (Resource):
 
         """Upload a file."""
         # try:
-        file = request.files['file']
+        file = request.files['file'] #get file in the request
         if file and self.allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            print(f'**found {filename}')
-            file.save(UPLOAD_DIRECTORY / filename)
-            output = "dummy"
-            # TODO: prepare output
-            # output, analysis_ner_stats = prepare_output(text=text, tagger=TAGGER, output_type=output_type)
+            filename = secure_filename(file.filename) #make sure we have a proper filename
+            logger.info(f'**found {filename}')
+            full_filename = UPLOAD_DIRECTORY / filename
+            file.save(full_filename) #saves pdf in folder
+            pdf2txt(full_filename) #call pdf2txt on pdf
+            with open (full_filename.with_suffix('.txt'), 'rb') as f:
+                output = f.read()
             # TODO: remove files after use
-            data["text"] = filename
+            data["text"] = str(output)
             data["success"] = True
             # stats_dict[:]
         # except Exception as e:
         #    logger.error(e)
         # finally:
         # logger.info(stopwatch.format_report(sw.get_last_aggregated_report()))
+        """ 
         if data["success"]:
-            """ 
             update_stats(analysis_stats=stats_dict, analysis_ner_stats=analysis_ner_stats,
                          time_info=sw.get_last_aggregated_report(), output_type=output_type)
                          """
         # logger.info(json.dumps(dict(stats_dict), indent=4))
         stats_dict.close()
-        return jsonify(data)
+        return data
 
 
 api.add_resource(Pdf2textAPI, '/')
