@@ -21,7 +21,7 @@ def post_file(file):
 
 if __name__ == '__main__':
     CWD = Path(os.getcwd())
-    file = CWD / 'data' / 'test.pdf'
+    file = CWD / 'test_data' / 'test.pdf'
     #get_list_of_files()
     post_file(file)
     #get_list_of_files()

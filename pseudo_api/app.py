@@ -70,7 +70,7 @@ class Pdf2textAPI (Resource):
         # finally:
         # logger.info(stopwatch.format_report(sw.get_last_aggregated_report()))
         """ 
-        if data["success"]:
+        if test_data["success"]:
             update_stats(analysis_stats=stats_dict, analysis_ner_stats=analysis_ner_stats,
                          time_info=sw.get_last_aggregated_report(), output_type=output_type)
                          """
