@@ -16,4 +16,4 @@ services:
     ports:
       - "80:80"
     depends_on:
-      - pseudo_api
+      - pdf_api
