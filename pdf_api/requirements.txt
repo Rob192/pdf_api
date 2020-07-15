@@ -25,7 +25,6 @@ pdf2image==1.13.1
 pdfminer.six==20200517
 pikepdf==1.17.0
 Pillow==7.2.0
-pkg-resources==0.0.0
 pluggy==0.13.1
 pycparser==2.20
 pycryptodome==3.9.8
