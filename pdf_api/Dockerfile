@@ -3,7 +3,6 @@ FROM python:3
 WORKDIR usr/src/pdf_api
 
 COPY requirements.txt ./
-RUN apt-get -y remove ocrmypdf
 RUN apt-get -y update
 RUN apt-get -y install \
     ghostscript \
