@@ -2,7 +2,7 @@ FROM python:3
 
 WORKDIR usr/src/pdf_api
 
-COPY requirement.txt ./
+COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 #ADD environment.yml environment.yml
