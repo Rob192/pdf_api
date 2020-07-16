@@ -5,6 +5,8 @@ WORKDIR usr/src/pdf_api
 COPY requirements.txt ./
 RUN apt-get -y update
 RUN apt-get -y install \
+    ocrmypdf \
+    g++ \
     ghostscript \
     icc-profiles-free \
     liblept5 \
@@ -22,6 +24,7 @@ RUN apt-get -y install \
     pkg-config \
     python-dev
 
+RUN wget https://bootstrap.pypa.io/get-pip.py && python3 get-pip.py
 RUN pip install --no-cache-dir -r requirements.txt
 
 #ADD environment.yml environment.yml

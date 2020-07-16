@@ -3,7 +3,7 @@ from pathlib import Path
 import os
 
 #url = "http://0.0.0.0:8000/"
-url = "http://167.172.34.189/"
+url = "http://167.172.34.189:8000/"
 
 def get_list_of_files():
     response = requests.get(f'{url}/files')
