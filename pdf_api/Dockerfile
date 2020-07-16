@@ -22,7 +22,9 @@ RUN apt-get -y install \
     build-essential \
     libpoppler-cpp-dev \
     pkg-config \
-    python-dev
+    python-dev \
+    openjdk-11-jdk-headless
+
 
 RUN wget https://bootstrap.pypa.io/get-pip.py && python3 get-pip.py
 RUN pip install --no-cache-dir -r requirements.txt
