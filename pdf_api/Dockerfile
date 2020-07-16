@@ -16,7 +16,11 @@ RUN apt-get -y install \
     python3-reportlab \
     qpdf \
     tesseract-ocr \
-    zlib1g
+    zlib1g \
+    build-essential \
+    libpoppler-cpp-dev \
+    pkg-config \
+    python-dev
 
 RUN pip install --no-cache-dir -r requirements.txt
 
