@@ -12,7 +12,6 @@ def get_list_of_files():
 def post_file(file):
     with open(file, 'rb') as fp:
         files = {'file': fp}
-
         response = requests.post(
             f'{url}', files=files
         )
