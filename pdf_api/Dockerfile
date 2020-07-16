@@ -1,8 +1,9 @@
-FROM python:3
+FROM python:3-buster
 
 WORKDIR usr/src/pdf_api
 
 COPY requirements.txt ./
+RUN mkdir -p /usr/share/man/man1
 RUN apt-get -y update
 RUN apt-get -y install \
     ocrmypdf \
@@ -23,10 +24,11 @@ RUN apt-get -y install \
     libpoppler-cpp-dev \
     pkg-config \
     python-dev \
-    openjdk-11-jdk-headless
+    default-jre \
+    default-jdk
 
 
-RUN wget https://bootstrap.pypa.io/get-pip.py && python3 get-pip.py
+#RUN wget https://bootstrap.pypa.io/get-pip.py && python3 get-pip.py
 RUN pip install --no-cache-dir -r requirements.txt
 
 #ADD environment.yml environment.yml
