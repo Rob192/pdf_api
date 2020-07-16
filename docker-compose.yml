@@ -9,8 +9,8 @@ services:
       - "8000:8000"
     command: gunicorn -w 2 --timeout 90 -b 0.0.0.0:8000 wsgi:app
 
-  nginx:
-    container_name: nginx
+  nginx_pdf:
+    container_name: nginx_pdf
     restart: always
     build: ./nginx
     ports:
