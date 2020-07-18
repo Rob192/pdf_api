@@ -1,39 +1,43 @@
-FROM python:3-buster
+FROM continuumio/miniconda3
 
 WORKDIR usr/src/pdf_api
+RUN mkdir /usr/share/man/man1/
 
-COPY requirements.txt ./
-RUN mkdir -p /usr/share/man/man1
 RUN apt-get -y update
 RUN apt-get -y install \
-    ocrmypdf \
     g++ \
+    build-essential \
+    ocrmypdf \
+    libpoppler-cpp-dev \
+    pkg-config \
+    openjdk-11-jdk \
     ghostscript \
     icc-profiles-free \
     liblept5 \
     libxml2 \
     pngquant \
-    python3-cffi \
-    python3-distutils \
-    python3-pkg-resources \
-    python3-reportlab \
     qpdf \
     tesseract-ocr \
-    zlib1g \
-    build-essential \
-    libpoppler-cpp-dev \
-    pkg-config \
-    python-dev \
-    default-jre \
-    default-jdk
+    zlib1g
 
 
-#RUN wget https://bootstrap.pypa.io/get-pip.py && python3 get-pip.py
-RUN pip install --no-cache-dir -r requirements.txt
+ADD environment.yml environment.yml
 
-#ADD environment.yml environment.yml
-
-#RUN conda env create -f environment.yml
-#ENV PATH /opt/conda/envs/flair_pseudo_api/bin:$PATH
-#RUN /bin/bash -c "source activate flair_pseudo_api"
+RUN conda env create -f environment.yml
+ENV PATH /opt/conda/envs/pdf_api/bin:$PATH
+RUN /bin/bash -c "source activate pdf_api"
 COPY . .
+
+#RUN mkdir -p /usr/share/man/man1
+#
+#
+#
+##RUN wget https://bootstrap.pypa.io/get-pip.py && python3 get-pip.py
+#RUN pip3 install --no-cache-dir -r requirements.txt
+#
+##ADD environment.yml environment.yml
+#
+##RUN conda env create -f environment.yml
+##ENV PATH /opt/conda/envs/flair_pseudo_api/bin:$PATH
+##RUN /bin/bash -c "source activate flair_pseudo_api"
+#COPY . .
