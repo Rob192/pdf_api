@@ -58,7 +58,7 @@ class Pdf2textAPI (Resource):
             full_filename = UPLOAD_DIRECTORY / filename
             file.save(full_filename) #saves pdf in folder
             pdf2txt(full_filename) #call pdf2txt on pdf
-            with open (full_filename.with_suffix('.txt'), 'rb') as f:
+            with open(full_filename.with_suffix('.txt'), 'r', encoding='utf-8') as f:
                 output = f.read()
             # os.remove(full_filename)
             # os.remove(full_filename.with_suffix('.txt'))

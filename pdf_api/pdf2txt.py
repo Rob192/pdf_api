@@ -79,7 +79,7 @@ def pdf2txt(doc_path):
             except Exception as e:
                 if file_is_too_small(txt_path):
                     try:
-                        ocrmypdf.ocr(doc_path, doc_path.with_suffix('.txt'), sidecar=txt_path)
+                        ocrmypdf.ocr(doc_path, doc_path.parents[0] / "result.pdf", sidecar=txt_path)
                         return 1
                     except Exception as e:
                         print(f"Could not ocr convert to txt file {doc_path}: {str(e)}")
