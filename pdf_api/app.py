@@ -60,21 +60,12 @@ class Pdf2textAPI (Resource):
             pdf2txt(full_filename) #call pdf2txt on pdf
             with open(full_filename.with_suffix('.txt'), 'r', encoding='utf-8') as f:
                 output = f.read()
-            # os.remove(full_filename)
-            # os.remove(full_filename.with_suffix('.txt'))
+            os.remove(full_filename)
+            os.remove(full_filename.with_suffix('.txt'))
             data["text"] = str(output)
             data["success"] = True
-            # stats_dict[:]
-        # except Exception as e:
-        #    logger.error(e)
-        # finally:
-        # logger.info(stopwatch.format_report(sw.get_last_aggregated_report()))
-        """ 
-        if test_data["success"]:
-            update_stats(analysis_stats=stats_dict, analysis_ner_stats=analysis_ner_stats,
-                         time_info=sw.get_last_aggregated_report(), output_type=output_type)
-                         """
-        # logger.info(json.dumps(dict(stats_dict), indent=4))
+            # TODO : add treatment for tabs
+            # TODO : add spell checks
         stats_dict.close()
         return data
 
