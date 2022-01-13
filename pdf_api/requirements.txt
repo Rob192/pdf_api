@@ -32,7 +32,7 @@ pycryptodome==3.9.8
 pyocr==0.7.2
 python-pdfbox==0.1.8
 pytz==2020.1
-reportlab==3.5.44
+reportlab==3.5.55
 requests==2.24.0
 six==1.15.0
 sortedcontainers==2.2.2
